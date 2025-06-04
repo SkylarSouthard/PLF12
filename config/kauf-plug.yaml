@@ -460,7 +460,7 @@ time:
 sensor:   # Power monitoring sensors output to Home Assistant
 
     # https://esphome.io/components/sensor/hlw8012.html
-  - platform: kauf_hlw8012
+   - platform: kauf_hlw8012
     id: hlw_main
     sel_pin:
       number: $sub_pm_sel_pin
