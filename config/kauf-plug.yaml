@@ -502,6 +502,26 @@ sensor:   # Power monitoring sensors output to Home Assistant
       state_class: measurement
       id: current
       filters:
+    - moving_average:
+        window_size: 60
+        send_every: 1
+        send_first_at: 1
+    - calibrate_linear:
+        - $current_cal_val1_in -> $current_cal_val1_out
+        - $current_cal_val2_in -> $current_cal_val2_out
+    - lambda: return x * id(scale_current).state/100.0f;
+
+        
+   current_average:
+      name: $friendly_name current_average
+      unit_of_measurement: A
+      state_class: measurement
+      id: current
+      filters:
+       moving_average:
+        window_size: 60
+        send_every: 1
+        send_first_at: 1
         - calibrate_linear:
             - $current_cal_val1_in -> $current_cal_val1_out
             - $current_cal_val2_in -> $current_cal_val2_out
